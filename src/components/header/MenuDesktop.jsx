@@ -7,8 +7,7 @@ const MenuDesktop = () => {
         <li className='duration-200 cursor-pointer select-none active:scale-95'>Home</li>
         <li className='duration-200 cursor-pointer select-none active:scale-95'>Produtos</li>
         <li className='duration-200 cursor-pointer select-none active:scale-95'>Assinaturas</li>
-        <li className='duration-200 cursor-pointer select-none active:scale-95'>Sobre Nós</li>
-        <li className='duration-200 cursor-pointer select-none active:scale-95'>Contato</li>
+        <li className='duration-200 cursor-pointer select-none active:scale-95'>Sobre</li>
       </ul>
     </div>
   )

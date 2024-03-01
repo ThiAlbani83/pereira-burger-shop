@@ -9,6 +9,9 @@ export default {
       fontFamily: {
         roboto: ["Roboto Serif", 'serif'],
         bungee: ['Bungee Spice', 'sans-serif'],
+      },
+      colors: {
+        primary: '#DB0000'
       }
     },
   },
