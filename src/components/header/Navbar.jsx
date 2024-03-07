@@ -6,7 +6,7 @@ import MenuMobile from "../header/MenuMobile";
 import CartWidget from "./CartWidget";
 
 const Navbar = ({ itemCount }) => {
-  const [isEmpty] = useState('');
+  const [isEmpty] = useState("");
 
   return (
     <div className="relative w-full border-b shadow-lg border-b-primary">
@@ -33,7 +33,7 @@ const Navbar = ({ itemCount }) => {
           </div>
           <span
             className={
-              itemCount == 0 
+              itemCount == 0
                 ? "hidden"
                 : "absolute w-[20px] h-[20px] text-center rounded-full border text-xs border-gray-100 bg-primary -top-3 left-3 z-20 text-white shadow-lg"
             }

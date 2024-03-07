@@ -20,7 +20,6 @@ const ItemCard = ({ onItemCountChange }) => {
   };
 
   const handleAddToCart = () => {
-    // Call the function to send itemCount to the parent component (Navbar)
     onItemCountChange(itemCount);
   };
 
@@ -49,7 +48,7 @@ const ItemCard = ({ onItemCountChange }) => {
           title="Adicionar ao Carrinho"
           style="primary"
           border="rounded-b-lg"
-          onClick={handleAddToCart} // Call handleAddToCart function on button click
+          onClick={handleAddToCart}
         />
       </div>
     </div>
