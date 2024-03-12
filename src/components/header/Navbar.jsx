@@ -21,10 +21,6 @@ const Navbar = ({ itemCount }) => {
           <MenuDesktop />
         </div>
         <div className="items-center hidden gap-3 md:flex">
-          {/* <Button title="Entrar" style="primary"/>
-          <a href="#" className="text-[14px] text-primary underline">
-            Cadastre-se
-          </a> */}
         </div>
         <div className="relative flex items-center gap-6">
           <CartWidget className="z-50" />

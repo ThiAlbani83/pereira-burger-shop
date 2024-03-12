@@ -3,7 +3,7 @@ import burger from "../../assets/burger.jpg";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import Button from "../Button";
 
-const ItemCard = ({ onItemCountChange }) => {
+const ItemCard = ({ onItemCountChange, title, img}) => {
   const [itemCount, setItemCount] = useState(1);
 
   const increaseCount = (e) => {
@@ -24,15 +24,15 @@ const ItemCard = ({ onItemCountChange }) => {
   };
 
   return (
-    <div className="w-[250px] h-full bg-gradient-to-br from-primary to-orange-500 rounded-xl p-[2px]">
+    <div className="w-[250px] h-full bg-gradient-to-br from-primary to-orange-500 rounded-xl p-[2px] shadow-md shadow-primary/65">
       <div className="flex flex-col items-center gap-2 bg-white rounded-xl">
         <img
-          src={burger}
-          alt="burger"
+          src={img}
+          alt={title}
           className="w-[250px] h-[250px] rounded-t-xl"
         />
-        <span className="font-bungee">Fraldinha e Costela</span>
-        <span className="flex items-center justify-between w-full px-2 text-sm text-gray-800 select-none font-roboto">
+        <span className="font-bungee">{title}</span>
+        <span className="flex items-center justify-between w-full px-2 py-2 text-sm text-gray-800 border-t border-b select-none font-roboto border-primary">
           <FaChevronLeft
             className="text-orange-500 cursor-pointer"
             onClick={decreaseCount}

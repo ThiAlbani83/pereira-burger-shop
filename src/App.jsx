@@ -6,7 +6,7 @@ function App() {
   const [itemCount, setItemCount] = useState(0);
 
   const handleItemCountChange = (newCount) => {
-    setItemCount(newCount);
+    setItemCount(itemCount + newCount);
   };
 
   return (
