@@ -3,7 +3,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import Button from "../Button";
 import { Link } from "react-router-dom";
 
-const ItemCard = ({ onItemCountChange, title, img, link }) => {
+const ItemCard = ({ title, img, link }) => {
   const [itemCount, setItemCount] = useState(1);
 
   const increaseCount = (e) => {
