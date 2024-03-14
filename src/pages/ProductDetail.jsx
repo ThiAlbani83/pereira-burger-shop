@@ -40,7 +40,7 @@ function ProductDetail({ onItemCountChange }) {
   }, []);
 
   const fetchProduct = async () => {
-    const response = await fetch(`https://api.npoint.io/d121204674c66342f91b/hamburgers/${id}`);
+    const response = await fetch(`http://localhost:3001/hamburgers?id=${id}`);
     const product = await response.json();
     setProduct(product);
   };

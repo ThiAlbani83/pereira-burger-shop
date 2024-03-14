@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import Button from "../Button";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const ItemCard = ({ title, img, link }) => {
   const [itemCount, setItemCount] = useState(1);
@@ -31,14 +31,14 @@ const ItemCard = ({ title, img, link }) => {
         />
 
         <span className="font-bungee">{title}</span>
-        <Link to={link} className="w-full">
+        <NavLink to={link} className="w-full">
           <Button
             title="Comprar Agora"
             style="primary"
             border="rounded-b-lg"
             paddingY="py-2"
           />
-        </Link>
+        </NavLink>
       </div>
     </div>
   );
