@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import burger from "../../assets/burger.jpg";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import Button from "../Button";
+import { Link } from "react-router-dom";
 
-const ItemCard = ({ onItemCountChange, title, img}) => {
+const ItemCard = ({ onItemCountChange, title, img, link }) => {
   const [itemCount, setItemCount] = useState(1);
 
   const increaseCount = (e) => {
@@ -19,9 +19,7 @@ const ItemCard = ({ onItemCountChange, title, img}) => {
     setItemCount(itemCount - 1);
   };
 
-  const handleAddToCart = () => {
-    onItemCountChange(itemCount);
-  };
+
 
   return (
     <div className="w-[250px] h-full bg-gradient-to-br from-primary to-orange-500 rounded-xl p-[2px] shadow-md shadow-primary/65">
@@ -31,25 +29,16 @@ const ItemCard = ({ onItemCountChange, title, img}) => {
           alt={title}
           className="w-[250px] h-[250px] rounded-t-xl"
         />
+
         <span className="font-bungee">{title}</span>
-        <span className="flex items-center justify-between w-full px-2 py-2 text-sm text-gray-800 border-t border-b select-none font-roboto border-primary">
-          <FaChevronLeft
-            className="text-orange-500 cursor-pointer"
-            onClick={decreaseCount}
+        <Link to={link} className="w-full">
+          <Button
+            title="Comprar Agora"
+            style="primary"
+            border="rounded-b-lg"
+            paddingY="py-2"
           />
-          Quantidade{" "}
-          <FaChevronRight
-            className="text-orange-500 cursor-pointer"
-            onClick={increaseCount}
-          />
-        </span>
-        <span className="text-gray-800 font-bungee">{itemCount}</span>
-        <Button
-          title="Adicionar ao Carrinho"
-          style="primary"
-          border="rounded-b-lg"
-          onClick={handleAddToCart}
-        />
+        </Link>
       </div>
     </div>
   );

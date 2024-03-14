@@ -19,7 +19,7 @@ const MenuMobile = () => {
       <div
         className={
           isOpen
-            ? "fixed text-gray-300 right-0 top-0 w-1/2 h-screen bg-red-100/30 backdrop-blur-md px-4 py-7 flex flex-col -z-10 ease-in duration-700 shadow-xl rounded-2xl"
+            ? "fixed text-gray-300 right-0 top-0 w-1/2 h-screen bg-black/90 backdrop-blur-md px-4 py-7 flex flex-col -z-10 ease-in duration-700 shadow-xl rounded-ss-2xl"
             : "absolute translate-x-40 transform-gpu w-0 overflow-hidden"
         }
       >
