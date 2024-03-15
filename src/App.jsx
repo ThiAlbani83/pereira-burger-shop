@@ -6,14 +6,10 @@ import ProductDetail from "./pages/ProductDetail";
 
 function App() {
   const [itemCount, setItemCount] = useState(0);
-  const [productId, setProductId] = useState(0);
 
   const handleItemCountChange = (newCount) => {
     setItemCount(itemCount + newCount);
   };
-
-
-
 
   return (
     <Router>
@@ -22,9 +18,12 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Home onItemCountChange={handleItemCountChange}/>}
+            element={<Home onItemCountChange={handleItemCountChange} />}
           />
-          <Route path={`/product-detail/:id`} element={<ProductDetail onItemCountChange={handleItemCountChange}/>} />
+          <Route
+            path={`/product-detail/:id`} element={<ProductDetail onItemCountChange={handleItemCountChange} />
+            }
+          />
         </Routes>
       </main>
     </Router>

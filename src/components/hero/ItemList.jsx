@@ -20,7 +20,7 @@ const ItemList = ({ onItemCountChange, onProductIdChange }) => {
   }, []);
 
   const fetchData = async () => {
-    const response = await fetch("http://localhost:3001/hamburgers");
+    const response = await fetch("https://api.npoint.io/d121204674c66342f91b/hamburgers");
     const jsonData = await response.json();
     setProduct(jsonData);
   };
