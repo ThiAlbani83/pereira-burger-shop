@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import ItemList from "../components/hero/ItemList";
 
-const Home = ({onItemCountChange}) => {
-
+const Home = ({ onItemCountChange }) => {
   return (
     <div>
-      <ItemList onItemCountChange={onItemCountChange} />
+      <ItemList onItemCountChange={onItemCountChange} isHome />
     </div>
   );
 };

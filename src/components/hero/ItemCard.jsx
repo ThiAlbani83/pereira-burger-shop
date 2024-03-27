@@ -4,22 +4,6 @@ import Button from "../Button";
 import { Link, NavLink } from "react-router-dom";
 
 const ItemCard = ({ title, img, link }) => {
-  const [itemCount, setItemCount] = useState(1);
-
-  const increaseCount = (e) => {
-    e.preventDefault();
-    setItemCount(itemCount + 1);
-  };
-
-  const decreaseCount = (e) => {
-    e.preventDefault();
-    if (itemCount === 0) {
-      return;
-    }
-    setItemCount(itemCount - 1);
-  };
-
-
 
   return (
     <div className="w-[250px] h-full bg-gradient-to-br from-primary to-orange-500 rounded-xl p-[2px] shadow-md shadow-primary/65">

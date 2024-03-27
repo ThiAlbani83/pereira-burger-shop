@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Button from "../Button";
+import { NavLink } from "react-router-dom";
 
 const MenuMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,28 +27,28 @@ const MenuMobile = () => {
         <ul className="flex flex-col items-center justify-between h-full py-32 text-base font-medium text-primary gap-14 font-roboto">
           <div className="flex flex-col gap-10">
             <li className="duration-200 cursor-pointer select-none active:scale-95">
-              Home
+              <NavLink to={"/"}>Início</NavLink>
             </li>
             <li className="duration-200 cursor-pointer select-none active:scale-95">
-              Produtos
+              <NavLink to={"/category/hamburgers"}>Hamburgers</NavLink>
             </li>
             <li className="duration-200 cursor-pointer select-none active:scale-95">
-              Assinaturas
+              <NavLink to={"/category/Porções"}>Porções</NavLink>
             </li>
             <li className="duration-200 cursor-pointer select-none active:scale-95">
-              Sobre Nós
+              <NavLink to={"/category/Bebidas"}>Bebidas</NavLink>
             </li>
-            <li className="duration-200 cursor-pointer select-none active:scale-95">
+            {/*  <li className="duration-200 cursor-pointer select-none active:scale-95">
               Contato
-            </li>
+            </li> */}
           </div>
 
-          <li className="flex flex-col gap-2">
+          {/* <li className="flex flex-col gap-2">
             <Button title="Entrar" style="secondary" />
             <a href="#" className="text-[14px] text-primary underline">
               Cadastre-se
             </a>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>

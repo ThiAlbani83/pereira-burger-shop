@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import Loader from "../components/Loader";
+import { useProductContext } from "../constants/productContext";
 
 function ProductDetail({ onItemCountChange }) {
   const { id } = useParams();
+  const { addProductToCart } = useProductContext(); // Utilizando a função para adicionar produto ao carrinho
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [ingredientes, setIngredientes] = useState([])
-
+  const [ingredientes, setIngredientes] = useState([]);
   const [itemCount, setItemCount] = useState(1);
 
   const increaseCount = (e) => {
@@ -29,6 +31,7 @@ function ProductDetail({ onItemCountChange }) {
     if (itemCount == 0) {
       alert("Nenhum produto selecionado");
     } else {
+      addProductToCart(product, itemCount); // Adicionando o produto ao carrinho com sua quantidade
       alert("Produto(s) adicionados ao carrinho!");
     }
   };
@@ -46,21 +49,15 @@ function ProductDetail({ onItemCountChange }) {
     );
     const product = await response.json();
     setProduct(product);
-    setIngredientes(product.ingredientes)
+    setIngredientes(product.ingredientes);
   };
 
   return (
     <div className="flex items-start justify-center w-full h-full px-8 py-8 pt-10 bg-gray-100 sm:px-8 md:px-18 lg:px-32">
-      <div>
-        {loading && (
-          <p className="text-xl font-roboto">Carregando informações...</p>
-        )}
-      </div>
+      <div>{loading && <Loader />}</div>
       {!loading && (
         <div>
-          <div
-            className="flex flex-col items-start justify-center w-full gap-8 md:gap-20 md:flex-row"
-          >
+          <div className="flex flex-col items-start justify-center w-full gap-8 md:gap-20 md:flex-row">
             <div className="flex items-center justify-center w-full">
               <img
                 src={product.imagem}
