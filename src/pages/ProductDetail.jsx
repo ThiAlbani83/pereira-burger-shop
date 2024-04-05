@@ -3,15 +3,39 @@ import { useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import Loader from "../components/Loader";
-import { useProductContext } from "../constants/productContext";
+import { useProductContext, useProductIds } from "../constants/productContext";
+import { getFirestore, collection, getDoc, doc } from "firebase/firestore";
 
 function ProductDetail({ onItemCountChange }) {
-  const { id } = useParams();
-  const { addProductToCart } = useProductContext(); // Utilizando a função para adicionar produto ao carrinho
-  const [product, setProduct] = useState([]);
+  const { ref, category } = useParams();
+  const { productIds } = useProductIds();
+  const { addProductToCart } = useProductContext(); 
+  const [product, setProduct] = useState(null); // Changed to null
   const [loading, setLoading] = useState(true);
   const [ingredientes, setIngredientes] = useState([]);
   const [itemCount, setItemCount] = useState(1);
+  const [error, setError] = useState(null);
+
+  const db = getFirestore();
+
+  const fetchDataFromFirestore = async () => {
+    try {
+      const productRef = doc(db, category, ref);
+      const productSnapshot = await getDoc(productRef);
+      if (productSnapshot.exists()) {
+        setProduct(productSnapshot.data());
+        setIngredientes(productSnapshot.data().ingredientes); // Access ingredientes from productSnapshot.data()
+        console.log(productSnapshot.data());
+      } else {
+        setError("Produto não encontrado");
+      }
+      setLoading(false);
+    } catch (err) {
+      console.log("Caiu no ERRO", err);
+      setError("Erro na busca por produtos");
+      setLoading(false);
+    }
+  };
 
   const increaseCount = (e) => {
     e.preventDefault();
@@ -31,31 +55,23 @@ function ProductDetail({ onItemCountChange }) {
     if (itemCount == 0) {
       alert("Nenhum produto selecionado");
     } else {
-      addProductToCart(product, itemCount); // Adicionando o produto ao carrinho com sua quantidade
+      addProductToCart(product, itemCount);
+      console.log(product.tipo);
       alert("Produto(s) adicionados ao carrinho!");
     }
   };
 
   useEffect(() => {
     setTimeout(() => {
-      fetchProduct();
+      fetchDataFromFirestore();
       setLoading(false);
     }, 2000);
-  }, []);
-
-  const fetchProduct = async () => {
-    const response = await fetch(
-      `https://api.npoint.io/d121204674c66342f91b/hamburgers/${id - 1}`
-    );
-    const product = await response.json();
-    setProduct(product);
-    setIngredientes(product.ingredientes);
-  };
+  }, [ref]);
 
   return (
     <div className="flex items-start justify-center w-full h-full px-8 py-8 pt-10 bg-gray-100 sm:px-8 md:px-18 lg:px-32">
       <div>{loading && <Loader />}</div>
-      {!loading && (
+      {!loading && product && ( // Check if product is not null
         <div>
           <div className="flex flex-col items-start justify-center w-full gap-8 md:gap-20 md:flex-row">
             <div className="flex items-center justify-center w-full">
@@ -70,7 +86,7 @@ function ProductDetail({ onItemCountChange }) {
                 {product.tipo}
               </h1>
               <p className="text-lg font-roboto max-w-[520px]">
-                {product.descrição}
+                {product.descricao}
               </p>
               <p className="flex items-center justify-between text-2xl font-bold md:justify-start md:gap-4 font-roboto">
                 <span>Preço: </span>R$:{product.valor}

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Loader from "../Loader";
-import ItemCard from "./ItemCard";
+import Loader from "../components/Loader";
+import ItemCard from "../components/hero/ItemCard";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
-import { useProductIds } from "../../constants/productContext";
+import { useProductIds } from "../constants/productContext";
 
-const ItemList = ({ onItemCountChange, isHome }) => {
+const ItemList = ({ onItemCountChange }) => {
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState([]);
   const [error, setError] = useState(null);
@@ -14,40 +14,15 @@ const ItemList = ({ onItemCountChange, isHome }) => {
 
   const fetchDataFromFirestore = async () => {
     try {
+      const querySnapshot = await getDocs(collection(db, "bebidas"));
       const tempArr = [];
-
-      // Buscar documentos da coleção 'hamburger'
-      const querySnapshotHamburger = await getDocs(collection(db, "hamburger"));
-      querySnapshotHamburger.forEach((doc) => {
-        const productData = {
-          id: doc.id,
-          ...doc.data(),
-          category: "hamburger",
-        };
-        tempArr.push(productData);
+      querySnapshot.forEach((doc) => {
+        tempArr.push({ id: doc.id, ...doc.data(), category: "bebidas" }); // Include the document ID in the data
         setProductIds(doc.id);
       });
-
-      // Buscar documentos da coleção 'porcoes'
-      const querySnapshotPorcoes = await getDocs(collection(db, "porcoes"));
-      querySnapshotPorcoes.forEach((doc) => {
-        const productData = { id: doc.id, ...doc.data(), category: "porcoes" };
-        tempArr.push(productData);
-      });
-
-      // Buscar documentos da coleção 'bebidas'
-      const querySnapshotBebidas = await getDocs(collection(db, "bebidas"));
-      querySnapshotBebidas.forEach((doc) => {
-        const productData = { id: doc.id, ...doc.data(), category: "bebidas" };
-        tempArr.push(productData);
-      });
-
       setProduct(tempArr);
-      setLoading(false);
     } catch (err) {
-      console.log("Erro ao buscar produtos:", err);
-      setError("Erro na busca por produtos");
-      setLoading(false);
+      console.log("Caiu no ERRO");
     }
   };
 
@@ -62,6 +37,7 @@ const ItemList = ({ onItemCountChange, isHome }) => {
       setLoading(false);
     }
   }, []);
+
 
   return (
     <div className="flex flex-col items-center justify-center w-full gap-10 px-8 py-8 pt-10 bg-gray-100 sm:px-8 md:px-18 lg:px-32">

@@ -1,7 +1,16 @@
+/**
+ * @fileoverview Cart component
+ * @author <NAME>
+ */
+
 import React, { useEffect, useState } from "react";
 import { useProductContext } from "../../constants/productContext";
 import { HiOutlineTrash } from "react-icons/hi2";
 
+/**
+ * Cart component
+ * @returns {JSX.Element} Cart page
+ */
 const Cart = () => {
   const { selectedProducts, removeProductFromCart } = useProductContext();
   const [cartUpdated, setCartUpdated] = useState(false);
@@ -15,18 +24,26 @@ const Cart = () => {
     setValorFinal(finalPrice);
   }, [selectedProducts]);
 
-  const handleRemoveFromCart = (productId) => {
-    removeProductFromCart(productId);
+  /**
+   * @param {string} productId product id
+   * @description removes product from cart
+   */
+  const handleRemoveFromCart = (productTipo) => {
+    removeProductFromCart(productTipo);
     console.log(selectedProducts);
-    localStorage.removeItem(productId);
+    localStorage.removeItem(productTipo);
   };
 
-  // Defina uma função para marcar o carrinho como atualizado e, em seguida, redefina-o após a re-renderização
+  /**
+   * @description marks cart as updated
+   */
   const markCartUpdated = () => {
     setCartUpdated(false);
   };
 
-  // Use a função markCartUpdated como um efeito secundário para redefinir o estado local após a re-renderização
+  /**
+   * @description redefines state after re-render
+   */
   useEffect(() => {
     markCartUpdated();
   }, [cartUpdated]);
@@ -55,7 +72,7 @@ const Cart = () => {
             <HiOutlineTrash
               size={45}
               className="cursor-pointer text-primary"
-              onClick={() => handleRemoveFromCart(product.product.id)}
+              onClick={() => handleRemoveFromCart(product.product.tipo)}
             />
           </div>
         ))}
