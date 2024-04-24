@@ -29,13 +29,13 @@ const MenuMobile = () => {
               <NavLink to={"/"}>Início</NavLink>
             </li>
             <li className="duration-200 cursor-pointer select-none active:scale-95">
-              <NavLink to={"/category/hamburgers"}>Hamburgers</NavLink>
+              <NavLink to={"/hamburgers"}>Hamburgers</NavLink>
             </li>
             <li className="duration-200 cursor-pointer select-none active:scale-95">
-              <NavLink to={"/category/Porções"}>Porções</NavLink>
+              <NavLink to={"/porcoes"}>Porções</NavLink>
             </li>
             <li className="duration-200 cursor-pointer select-none active:scale-95">
-              <NavLink to={"/category/Bebidas"}>Bebidas</NavLink>
+              <NavLink to={"/bebidas"}>Bebidas</NavLink>
             </li>
           </div>
         </ul>
