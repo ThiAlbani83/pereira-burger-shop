@@ -54,10 +54,10 @@ const Cart = () => {
         alert(`Compra realizada com sucesso! \nId da compra: ${id}`)
       )
       .then(() => {
-        // Prompt user before clearing the cart
-        if (window.confirm("Deseja limpar o carrinho?")) {
-          clearCart();
-        }
+        clearCart();
+      })
+      .then(() => {
+        window.location.href = "/";
       })
       .catch((err) => console.error(err));
   };
