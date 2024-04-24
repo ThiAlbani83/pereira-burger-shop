@@ -7,6 +7,7 @@ E-commerce created as a ReactJS course final project!
 - [ThiAlbani83](https://github.com/ThiAlbani83);
 - [Ivina-als](https://github.com/Ivina-als);
 - [lucaspatraodev](https://github.com/lucaspatraodev);
+- [PedroHCM14](https://github.com/PedroHCM14);
 
 ## Instalação
 

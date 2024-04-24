@@ -6,13 +6,11 @@
 import React, { useEffect, useState } from "react";
 import { useProductContext } from "../../constants/productContext";
 import { HiOutlineTrash } from "react-icons/hi2";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 
-/**
- * Cart component
- * @returns {JSX.Element} Cart page
- */
 const Cart = () => {
-  const { selectedProducts, removeProductFromCart } = useProductContext();
+  const { selectedProducts, removeProductFromCart, clearCart } =
+    useProductContext();
   const [cartUpdated, setCartUpdated] = useState(false);
   const [valorFinal, setValorFinal] = useState(0);
 
@@ -24,29 +22,45 @@ const Cart = () => {
     setValorFinal(finalPrice);
   }, [selectedProducts]);
 
-  /**
-   * @param {string} productId product id
-   * @description removes product from cart
-   */
   const handleRemoveFromCart = (productTipo) => {
     removeProductFromCart(productTipo);
-    console.log(selectedProducts);
     localStorage.removeItem(productTipo);
   };
 
-  /**
-   * @description marks cart as updated
-   */
   const markCartUpdated = () => {
     setCartUpdated(false);
   };
 
-  /**
-   * @description redefines state after re-render
-   */
   useEffect(() => {
     markCartUpdated();
   }, [cartUpdated]);
+
+  /*buyer simula os dados capitados através do login/cadastro do cliente  */
+
+  const sendOrder = () => {
+    const order = {
+      buyer: {
+        name: "Ivina Albuquerque",
+        phone: "819999999",
+        email: "ivin@gmail.com",
+      },
+      items: selectedProducts,
+      date: new Date().toLocaleString(),
+    };
+    const db = getFirestore();
+    const ordersCollection = collection(db, "orders");
+    addDoc(ordersCollection, order)
+      .then(({ id }) =>
+        alert(`Compra realizada com sucesso! \nId da compra: ${id}`)
+      )
+      .then(() => {
+        // Prompt user before clearing the cart
+        if (window.confirm("Deseja limpar o carrinho?")) {
+          clearCart();
+        }
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <main className="w-full flex flex-col items-center mt-20">
@@ -76,8 +90,22 @@ const Cart = () => {
             />
           </div>
         ))}
-        <p className="text-2xl font-roboto text-primary font-bold mt-10">Total: R${valorFinal}</p>
+        <p className="text-2xl font-roboto text-primary font-bold mt-10">
+          Total: R${valorFinal.toFixed(2)}
+        </p>
       </div>
+      <button
+        onClick={() => {
+          selectedProducts.length > 0 && sendOrder();
+        }}
+        className={
+          selectedProducts.length > 0
+            ? "bg-yellow-500 text-white rounded-full px-24 py-4 mt-4"
+            : "bg-gray-500 text-white rounded-full px-24 py-4 mt-4 pointer-events-none"
+        }
+      >
+        Finalizar Compra
+      </button>
     </main>
   );
 };
