@@ -26,7 +26,7 @@ Instale este projeto com npm
 Clone o projeto
 
 ```bash
-  git clone https://github.com/ThiAlbani83/ecommerce-react-course.git
+  git clone https://github.com/ThiAlbani83/pereira-burger-shop.git
 ```
 
 Entre no diretório do projeto
